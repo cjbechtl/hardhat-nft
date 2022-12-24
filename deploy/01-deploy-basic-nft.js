@@ -1,26 +1,26 @@
 const { network } = require("hardhat");
-const { developmentChains, INITIAL_SUPPLY } = require("../helper-hardhat-config");
+const { developmentChains } = require("../helper-hardhat-config");
 const { verify } = require("../utils/verify");
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
 	const { deploy, log } = deployments;
 	const { deployer } = await getNamedAccounts();
-	const chainId = network.config.chainId;
-	const args = [INITIAL_SUPPLY];
 
-	const ourToken = await deploy("OurToken", {
+	const args = [];
+
+	const basicNft = await deploy("BasicNft", {
 		from: deployer,
 		args,
 		log: true,
 		waitConfirmations: network.config.blockConfirmations || 1,
 	});
 
-	console.log("OurToken deployed at: ", ourToken.address);
+	console.log("BasicNft deployed at: ", basicNft.address);
 
 	if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-		await verify(ourToken.address, args);
+		await verify(basicNft.address, args);
 	}
 	log("---------------------------------------");
 };
 
-module.exports.tags = ["all", "ourToken"];
+module.exports.tags = ["all", "basicNft"];

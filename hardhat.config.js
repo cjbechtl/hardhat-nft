@@ -13,7 +13,7 @@ const MAINNET_RPC_URL = process.env.MAINNET_RPC_URL;
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
 	solidity: {
-		compilers: [{ version: "0.8.9" }, { version: "0.8.4" }],
+		compilers: [{ version: "0.8.9" }, { version: "0.8.4" }, { version: "0,8.0" }],
 	},
 	defaultNetwork: "hardhat",
 	networks: {
@@ -26,9 +26,9 @@ module.exports = {
 		hardhat: {
 			chainId: 31337,
 			blockConfirmations: 1,
-			forking: {
-				url: MAINNET_RPC_URL,
-			},
+			// forking: {
+			// 	url: MAINNET_RPC_URL,
+			// },
 		},
 	},
 	etherscan: {
